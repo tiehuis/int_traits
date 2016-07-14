@@ -3,4 +3,10 @@ name = "int_traits"
 version = "0.1.0"
 authors = ["tiehuis <marctiehuis@gmail.com>"]
 
+description = "Provides a trait for extended functions on integers"
+repository = "https://github.com/tiehuis/int_traits"
+readme = "README.md"
+keywords = ["sqrt", "log", "integer", "int", "trait", "traits"]
+license = "Apache-2.0/MIT"
+
 [dependencies]

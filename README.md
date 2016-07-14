@@ -58,7 +58,7 @@ use int_traits::IntTraits;
 fn main() {
     let a = 50_usize;
 
-    println!("{:?}", a.sqrt());
+    println!("{}", a.sqrt());
 }
 ```
 
