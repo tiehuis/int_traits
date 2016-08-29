@@ -48,21 +48,21 @@ macro_rules! impl_int_trait {
         impl IntTraits<$t> for $t {
             fn sqrt(self) -> $t {
                 if self < 0 {
-                    panic!("cannot take sqrt on a negative value: {}", self)
+                    panic!("cannot take sqrt of a negative value: {}", self)
                 }
                 (self as f64).sqrt() as $t
             }
 
             fn cbrt(self) -> $t {
                 if self < 0 {
-                    panic!("cannot take cbrt on a negative value: {}", self)
+                    panic!("cannot take cbrt of a negative value: {}", self)
                 }
-                (self as f64).sqrt() as $t
+                (self as f64).cbrt() as $t
             }
 
             fn log(self, n: u64) -> $t {
                 if self <= 0 {
-                    panic!("cannot take cbrt on a value less than or equal to 0: {}", self)
+                    panic!("cannot take log of a value less than or equal to 0: {}", self)
                 }
                 (self as f64).log(n as f64) as $t
             }
@@ -78,12 +78,12 @@ macro_rules! impl_uint_trait {
             }
 
             fn cbrt(self) -> $t {
-                (self as f64).sqrt() as $t
+                (self as f64).cbrt() as $t
             }
 
             fn log(self, n: u64) -> $t {
                 if self == 0 {
-                    panic!("cannot take cbrt on a value less than or equal to 0: {}", self)
+                    panic!("cannot take log of a value less than or equal to 0: {}", self)
                 }
                 (self as f64).log(n as f64) as $t
             }
@@ -108,7 +108,7 @@ mod tests {
     use super::IntTraits;
 
     #[test]
-    fn unsigned_overall() {
+    fn unsigned_sqrt_overall() {
         assert_eq!(63_u8.sqrt(), 7);
         assert_eq!(63_u16.sqrt(), 7);
         assert_eq!(63_u32.sqrt(), 7);
@@ -117,12 +117,30 @@ mod tests {
     }
 
     #[test]
-    fn signed_overall() {
+    fn signed_sqrt_overall() {
         assert_eq!(63_i8.sqrt(), 7);
         assert_eq!(63_i16.sqrt(), 7);
         assert_eq!(63_i32.sqrt(), 7);
         assert_eq!(63_i64.sqrt(), 7);
         assert_eq!(63_isize.sqrt(), 7);
+    }
+
+    #[test]
+    fn unsigned_cbrt_overall() {
+        assert_eq!(247_u8.cbrt(), 6);
+        assert_eq!(891_u16.cbrt(), 9);
+        assert_eq!(891_u32.cbrt(), 9);
+        assert_eq!(891_u64.cbrt(), 9);
+        assert_eq!(891_usize.cbrt(), 9);
+    }
+
+    #[test]
+    fn signed_cbrt_overall() {
+        assert_eq!(113_i8.cbrt(), 4);
+        assert_eq!(891_i16.cbrt(), 9);
+        assert_eq!(891_i32.cbrt(), 9);
+        assert_eq!(891_i64.cbrt(), 9);
+        assert_eq!(891_isize.cbrt(), 9);
     }
 
     #[test]
@@ -146,6 +164,10 @@ mod tests {
     #[test]
     fn zero_sqrt() {
         assert_eq!(0.sqrt(), 0);
+    }
+
+    #[test]
+    fn zero_cbrt() {
         assert_eq!(0.cbrt(), 0);
     }
 }
