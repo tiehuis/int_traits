@@ -1,6 +1,6 @@
 [package]
 name = "int_traits"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["tiehuis <marctiehuis@gmail.com>"]
 
 description = "Provides a trait for extended functions on integers"
